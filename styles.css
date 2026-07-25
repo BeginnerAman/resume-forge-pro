@@ -232,12 +232,6 @@ body {
     justify-content: flex-start !important;
 }
 
-.resume-paper img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: cover;
-}
-
 /* Standardized Executive Photo Container */
 .header-photo, .tmpl2-photo, .tmpl4-avatar, .tmpl5-photo-wrap, .tmpl6-photo, .tmpl8-avatar, .tmpl9-photo, .tmpl10-photo-box, .tmpl12-photo {
     overflow: hidden;
@@ -486,14 +480,10 @@ body {
 .template-5 { padding: 0 !important; font-family: 'Plus Jakarta Sans', sans-serif; color: #1e293b; display: block !important; }
 .tmpl5-container { display: flex; flex-direction: column; height: auto; max-height: 100%; }
 .tmpl5-header { background: #064e3b; color: white; padding: 8mm 12mm; display: flex; justify-content: space-between; align-items: center; }
-.tmpl5-header-left { flex: 1; }
 .tmpl5-name { font-size: 1.65rem; font-weight: 800; letter-spacing: -0.01em; }
-.tmpl5-subtitle { font-size: 0.84rem; color: #a7f3d0; margin-top: 0.12rem; font-weight: 500; }
-.tmpl5-photo-wrap { width: 85px; height: 100px; border-radius: 8px; border: 2px solid #a7f3d0; overflow: hidden; flex-shrink: 0; margin-left: 1rem; box-shadow: 0 4px 12px rgba(0,0,0,0.25); }
+.tmpl5-photo-wrap { width: 85px; height: 100px; border-radius: 8px; border: 2px solid #a7f3d0; overflow: hidden; flex-shrink: 0; margin-left: 1rem; }
 .tmpl5-photo-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.tmpl5-contact-stripe { background: #f0fdf4; border-bottom: 1px solid #a7f3d0; color: #065f46; padding: 0.4rem 10mm; margin-bottom: 0.2rem; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 0.25rem 1rem; font-size: 0.77rem; font-weight: 600; }
-.tmpl5-contact-item { white-space: nowrap; display: inline-flex; align-items: center; gap: 0.35rem; }
-.tmpl5-contact-address { width: 100%; text-align: center; color: #065f46; font-size: 0.76rem; word-break: break-word; display: flex; justify-content: center; align-items: center; gap: 0.35rem; }
+.tmpl5-contact-stripe { background: #f0fdf4; border-bottom: 1px solid #a7f3d0; color: #065f46; padding: 0.4rem 12mm; margin-bottom: 0.2rem; display: flex; gap: 1.2rem; font-size: 0.76rem; font-weight: 600; }
 .tmpl5-body { padding: 6mm 12mm 10mm 12mm; display: flex; flex-direction: column; gap: 0.85rem; justify-content: flex-start !important; }
 .tmpl5-sec-title { font-size: 0.86rem; font-weight: 800; color: #064e3b; background: linear-gradient(90deg, #ecfdf5 0%, #ffffff 100%); border-left: 4px solid #059669; padding: 0.25rem 0.65rem; margin-bottom: 0.4rem; text-transform: uppercase; letter-spacing: 0.05em; }
 .tmpl5-text { font-size: 0.81rem; color: #334155; line-height: 1.45; }
