@@ -1,0 +1,14 @@
+# Python / Script files
+*.py
+*.pyc
+__pycache__/
+
+# Output directories
+All_12_Resumes_PDF/
+WhatsApp Image *.jpeg
+
+# System / IDE files
+.DS_Store
+.vscode/
+.idea/
+*.log

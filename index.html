@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Multi-Template Resume Builder</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&family=Poppins:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- html2pdf.js CDN for Direct Export -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray">
+
+    <!-- Top Action Bar (Hidden during print) -->
+    <header class="top-nav no-print">
+        <div class="nav-container">
+            <div class="brand">
+                <i class="fa-solid fa-file-invoice brand-icon"></i>
+                <span class="brand-title">Resume Builder Pro</span>
+            </div>
+            
+            <!-- Template Selector Pill -->
+            <div class="template-picker-wrapper">
+                <label for="templateSelect"><i class="fa-solid fa-layer-group"></i> Template Style:</label>
+                <select id="templateSelect" class="template-dropdown">
+                    <option value="template-1" selected>Template 1: Classic Reference (Original)</option>
+                    <option value="template-2">Template 2: Modern Executive (Sidebar)</option>
+                    <option value="template-3">Template 3: Elegant Minimalist (Serif)</option>
+                    <option value="template-4">Template 4: Tech & Creative (Banner & Pills)</option>
+                    <option value="template-5">Template 5: Corporate Elite (Emerald)</option>
+                    <option value="template-6">Template 6: Split Minimal Modern (Purple)</option>
+                    <option value="template-7">Template 7: Ivy League Classic (Harvard Academic)</option>
+                    <option value="template-8">Template 8: Slate & Charcoal (Corporate Leader)</option>
+                    <option value="template-9">Template 9: Minimalist Timeline (Contemporary)</option>
+                    <option value="template-10">Template 10: Bespoke Educator (Oxford Leader)</option>
+                    <option value="template-11">Template 11: Stanford Academic (Minimalist Monochrome ATS)</option>
+                    <option value="template-12">Template 12: Emerald Senior Faculty (Executive Leader)</option>
+                    <option value="template-13">Template 13: Cambridge Executive ATS (Navy Minimalist)</option>
+                    <option value="template-14">Template 14: Silicon Valley Tech Lead (Teal & Mint)</option>
+                    <option value="template-15">Template 15: Oxford Scholar Classic (Serif Double Rule)</option>
+                    <option value="template-16">Template 16: Tokyo Contemporary (Obsidian & Slate)</option>
+                    <option value="template-17">Template 17: Imperial Executive (Indigo & Gold Accent)</option>
+                    <option value="template-18">Template 18: Zurich Minimalist (Clean Swiss Monochrome)</option>
+                    <option value="template-19">Template 19: Pacific Faculty (Cobalt Senior Dean)</option>
+                    <option value="template-20">Template 20: Monaco Modern (Charcoal & Rose Gold)</option>
+                </select>
+            </div>
+
+            <div class="actions">
+                <button id="toggleEditBtn" class="btn btn-secondary">
+                    <i class="fa-solid fa-pen-to-square"></i> <span id="editBtnText">Hide Editor</span>
+                </button>
+                <button id="resetDataBtn" class="btn btn-outline" title="Reset to reference resume data">
+                    <i class="fa-solid fa-rotate-left"></i> Reset
+                </button>
+                <button id="printPdfBtn" class="btn btn-accent" title="Quick Print (Ctrl+P)">
+                    <i class="fa-solid fa-print"></i> Quick Print (Ctrl+P)
+                </button>
+                <button id="downloadPdfBtn" class="btn btn-primary" title="Export 4K High Quality Vector PDF (Ctrl+Shift+S)">
+                    <i class="fa-solid fa-file-pdf"></i> Download 4K PDF
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="main-layout container">
+        
+        <!-- Sidebar Editor (Hidden during print) -->
+        <aside id="editorSidebar" class="editor-sidebar no-print">
+            <div class="sidebar-header">
+                <h2><i class="fa-solid fa-sliders"></i> Edit Resume Details</h2>
+                <p>Changes automatically update across all 20 templates.</p>
+            </div>
+
+            <form id="resumeForm" onsubmit="event.preventDefault();">
+
+                <!-- Template Selector inside Editor -->
+                <div class="form-section highlight-section">
+                    <h3><i class="fa-solid fa-palette"></i> Choose Template Style</h3>
+                    <div class="form-group">
+                        <select id="editorTemplateSelect" class="form-control-select">
+                            <option value="template-1" selected>Template 1: Classic Reference (Original)</option>
+                            <option value="template-2">Template 2: Modern Executive (Sidebar)</option>
+                            <option value="template-3">Template 3: Elegant Minimalist (Serif)</option>
+                            <option value="template-4">Template 4: Tech & Creative (Banner & Pills)</option>
+                            <option value="template-5">Template 5: Corporate Elite (Emerald)</option>
+                            <option value="template-6">Template 6: Split Minimal Modern (Purple)</option>
+                            <option value="template-7">Template 7: Ivy League Classic (Harvard Academic)</option>
+                            <option value="template-8">Template 8: Slate & Charcoal (Corporate Leader)</option>
+                            <option value="template-9">Template 9: Minimalist Timeline (Contemporary)</option>
+                            <option value="template-10">Template 10: Bespoke Educator (Oxford Leader)</option>
+                            <option value="template-11">Template 11: Stanford Academic (Minimalist Monochrome ATS)</option>
+                            <option value="template-12">Template 12: Emerald Senior Faculty (Executive Leader)</option>
+                            <option value="template-13">Template 13: Cambridge Executive ATS (Navy Minimalist)</option>
+                            <option value="template-14">Template 14: Silicon Valley Tech Lead (Teal & Mint)</option>
+                            <option value="template-15">Template 15: Oxford Scholar Classic (Serif Double Rule)</option>
+                            <option value="template-16">Template 16: Tokyo Contemporary (Obsidian & Slate)</option>
+                            <option value="template-17">Template 17: Imperial Executive (Indigo & Gold Accent)</option>
+                            <option value="template-18">Template 18: Zurich Minimalist (Clean Swiss Monochrome)</option>
+                            <option value="template-19">Template 19: Pacific Faculty (Cobalt Senior Dean)</option>
+                            <option value="template-20">Template 20: Monaco Modern (Charcoal & Rose Gold)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Profile & Header Section -->
+                <div class="form-section">
+                    <h3><i class="fa-solid fa-user"></i> Personal Information</h3>
+                    
+                    <div class="form-group">
+                        <label for="inputName">Full Name</label>
+                        <input type="text" id="inputName" placeholder="SARAH JENKINS">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputTagline">Tagline / Subtitle</label>
+                        <input type="text" id="inputTagline" placeholder="Aspiring SST & Geography Teacher">
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="inputMobile">Mobile</label>
+                            <input type="text" id="inputMobile" placeholder="+91 98765 43210">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail">Email</label>
+                            <input type="email" id="inputEmail" placeholder="example@email.com">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputAddress">Address</label>
+                        <input type="text" id="inputAddress" placeholder="Vill. Sihatikar, Post Bakhira...">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputPhoto">Profile Photo</label>
+                        <div style="display: flex; gap: 0.5rem; align-items: center;">
+                            <input type="file" id="inputPhoto" accept="image/*" style="flex: 1;">
+                            <button type="button" id="removePhotoBtn" class="btn-small-danger" title="Remove current photo">
+                                <i class="fa-solid fa-trash-can"></i> Remove
+                            </button>
+                        </div>
+                        <small class="help-text">Upload a picture to update across templates</small>
+                    </div>
+                </div>
+
+                <!-- Career Objective -->
+                <div class="form-section">
+                    <h3><i class="fa-solid fa-bullseye"></i> Career Objective</h3>
+                    <div class="form-group">
+                        <textarea id="inputObjective" rows="4" placeholder="An enthusiastic and dedicated B.Ed. & M.A. graduate..."></textarea>
+                    </div>
+                </div>
+
+                <!-- Education Section -->
+                <div class="form-section">
+                    <div class="section-title-with-action">
+                        <h3><i class="fa-solid fa-graduation-cap"></i> Education</h3>
+                        <button type="button" id="addEduBtn" class="btn btn-sm btn-outline"><i class="fa-solid fa-plus"></i> Add Row</button>
+                    </div>
+                    <div id="educationFormList"></div>
+                </div>
+
+                <!-- Skills Section -->
+                <div class="form-section">
+                    <h3><i class="fa-solid fa-list-check"></i> Skills</h3>
+                    <div class="form-group">
+                        <label>Skills (One per line)</label>
+                        <textarea id="inputSkills" rows="5" placeholder="Strong Subject Knowledge (Geography)..."></textarea>
+                    </div>
+                </div>
+
+                <!-- Certifications -->
+                <div class="form-section">
+                    <h3><i class="fa-solid fa-certificate"></i> Certifications</h3>
+                    <div class="form-group">
+                        <label>Certifications (One per line)</label>
+                        <textarea id="inputCertifications" rows="4" placeholder="National Cadet Corps (NCC) Certificate 'C'..."></textarea>
+                    </div>
+                </div>
+
+                <!-- Achievements -->
+                <div class="form-section">
+                    <h3><i class="fa-solid fa-trophy"></i> Achievements</h3>
+                    <div class="form-group">
+                        <label>Achievements (One per line)</label>
+                        <textarea id="inputAchievements" rows="4" placeholder="From school to college, consistently ranked..."></textarea>
+                    </div>
+                </div>
+
+                <!-- Personal Details -->
+                <div class="form-section">
+                    <h3><i class="fa-solid fa-id-card"></i> Personal Details</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="inputGender">Gender</label>
+                            <select id="inputGender" class="form-control-select">
+                                <option value="Female">Female</option>
+                                <option value="Male">Male</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputMarital">Marital Status</label>
+                            <select id="inputMarital" class="form-control-select">
+                                <option value="Unmarried">Unmarried</option>
+                                <option value="Married">Married</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="inputGuardianRelation">Relation Type</label>
+                            <select id="inputGuardianRelation" class="form-control-select">
+                                <option value="Father">Father's Name</option>
+                                <option value="Husband">Husband's Name</option>
+                                <option value="Mother">Mother's Name</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputHusband" id="labelGuardian">Father's Name</label>
+                            <input type="text" id="inputHusband" placeholder="Father's Full Name">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="inputDob">Date of Birth</label>
+                            <input type="text" id="inputDob" placeholder="15 August 1998">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputLanguages">Languages Known</label>
+                            <input type="text" id="inputLanguages" placeholder="English, Hindi">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group" style="grid-column: span 2;">
+                            <label for="inputHobbies">Hobbies</label>
+                            <input type="text" id="inputHobbies" placeholder="Reading books, Map reading & Gardening">
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </aside>
+
+        <!-- Preview Area (Paper Document) -->
+        <main class="preview-area">
+            <div id="resumePaper" class="resume-paper template-10">
+                <!-- Rendered dynamically by script.js -->
+            </div>
+        </main>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
