@@ -482,9 +482,8 @@ body {
 .tmpl5-header { background: #064e3b; color: white; padding: 8mm 12mm; display: flex; justify-content: space-between; align-items: center; }
 .tmpl5-name { font-size: 1.65rem; font-weight: 800; letter-spacing: -0.01em; }
 .tmpl5-subtitle { font-size: 0.84rem; color: #a7f3d0; margin-top: 0.12rem; font-weight: 500; }
-.tmpl5-contact-stripe { background: #f0fdf4; border-bottom: 1px solid #a7f3d0; color: #065f46; padding: 0.45rem 12mm; margin-bottom: 0.2rem; display: flex; flex-wrap: wrap; align-items: center; gap: 0.35rem 1.2rem; font-size: 0.78rem; font-weight: 600; }
-.tmpl5-contact-item { white-space: nowrap; display: inline-flex; align-items: center; gap: 0.35rem; }
-.tmpl5-contact-address { width: 100%; color: #065f46; font-size: 0.78rem; overflow-wrap: break-word; display: flex; align-items: flex-start; gap: 0.35rem; }
+.tmpl5-contact-stripe { background: #f0fdf4; border-bottom: 1px solid #a7f3d0; color: #065f46; padding: 0.38rem 10mm; margin-bottom: 0.2rem; display: flex; justify-content: space-between; align-items: center; gap: 0.5rem; font-size: 0.74rem; font-weight: 600; }
+.tmpl5-contact-stripe span { white-space: nowrap; display: inline-flex; align-items: center; gap: 0.35rem; }
 .tmpl5-body { padding: 6mm 12mm 10mm 12mm; display: flex; flex-direction: column; gap: 0.85rem; justify-content: flex-start !important; }
 .tmpl5-sec-title { font-size: 0.86rem; font-weight: 800; color: #064e3b; background: linear-gradient(90deg, #ecfdf5 0%, #ffffff 100%); border-left: 4px solid #059669; padding: 0.25rem 0.65rem; margin-bottom: 0.4rem; text-transform: uppercase; letter-spacing: 0.05em; }
 .tmpl5-text { font-size: 0.81rem; color: #334155; line-height: 1.45; }
