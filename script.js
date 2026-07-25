@@ -927,9 +927,10 @@ function renderTemplate5HTML(data) {
             </header>
 
             <div class="tmpl5-contact-stripe">
-                ${data.mobile ? `<span><i class="fa-solid fa-phone"></i> ${escapeHtml(data.mobile)}</span>` : ''}
-                ${data.email ? `<span><i class="fa-solid fa-envelope"></i> ${escapeHtml(data.email)}</span>` : ''}
-                ${data.address ? `<span><i class="fa-solid fa-location-dot"></i> ${escapeHtml(data.address)}</span>` : ''}
+                ${data.mobile ? `<span class="tmpl5-contact-item"><i class="fa-solid fa-phone"></i> ${escapeHtml(data.mobile)}</span>` : ''}
+                ${(data.mobile && data.email) ? `<span style="color:#059669">•</span>` : ''}
+                ${data.email ? `<span class="tmpl5-contact-item"><i class="fa-solid fa-envelope"></i> ${escapeHtml(data.email)}</span>` : ''}
+                ${data.address ? `<div class="tmpl5-contact-address"><i class="fa-solid fa-location-dot"></i> ${escapeHtml(data.address)}</div>` : ''}
             </div>
 
             <div class="tmpl5-body">
