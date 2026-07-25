@@ -75,17 +75,6 @@ body {
     letter-spacing: -0.01em;
 }
 
-.brand-author {
-    font-size: 0.76rem;
-    color: #38bdf8;
-    background: rgba(56, 189, 248, 0.12);
-    border: 1px solid rgba(56, 189, 248, 0.3);
-    padding: 0.15rem 0.5rem;
-    border-radius: 12px;
-    font-weight: 600;
-    margin-left: 0.2rem;
-}
-
 .template-picker-wrapper {
     display: flex;
     align-items: center;
@@ -1026,42 +1015,10 @@ body {
 .app-footer {
     background: #0f172a;
     color: #94a3b8;
-    padding: 1.25rem 1.5rem;
-    margin-top: auto;
+    text-align: center;
+    padding: 0.65rem 1rem;
+    font-size: 0.78rem;
     border-top: 1px solid #1e293b;
     font-family: 'Inter', sans-serif;
-}
-.footer-container {
-    max-width: 1400px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 0.75rem;
-    font-size: 0.85rem;
-}
-.footer-text strong {
-    color: #f8fafc;
-}
-.footer-links {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-}
-.footer-link {
-    color: #38bdf8;
-    text-decoration: none;
-    font-weight: 600;
-    transition: color 0.2s ease;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
-}
-.footer-link:hover {
-    color: #7dd3fc;
-    text-decoration: underline;
-}
-.footer-sep {
-    color: #475569;
+    font-weight: 500;
 }
