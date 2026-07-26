@@ -278,16 +278,22 @@ function attachEventListeners() {
         btnText.textContent = sidebar.classList.contains('collapsed') ? 'Show Editor' : 'Hide Editor';
     });
 
-    // Mobile View Tab Switcher (Edit Details vs View Resume)
+    // Mobile View Tab Switcher (Edit Details vs View Resume vs Zoom)
     const mobileBtnEdit = document.getElementById('mobileBtnEdit');
     const mobileBtnPreview = document.getElementById('mobileBtnPreview');
+    const mobileBtnZoom = document.getElementById('mobileBtnZoom');
+    const zoomBtnText = document.getElementById('zoomBtnText');
     const editorSidebarEl = document.getElementById('editorSidebar');
     const previewAreaEl = document.querySelector('.preview-area');
+    const paperEl = document.getElementById('resumePaper');
+
+    let isZoomedIn = false;
 
     if (mobileBtnEdit && mobileBtnPreview) {
         mobileBtnEdit.addEventListener('click', () => {
             mobileBtnEdit.classList.add('active');
             mobileBtnPreview.classList.remove('active');
+            if (mobileBtnZoom) mobileBtnZoom.style.display = 'none';
             if (editorSidebarEl) editorSidebarEl.classList.remove('mobile-hidden');
             if (previewAreaEl) previewAreaEl.classList.add('mobile-hidden');
         });
@@ -295,10 +301,28 @@ function attachEventListeners() {
         mobileBtnPreview.addEventListener('click', () => {
             mobileBtnPreview.classList.add('active');
             mobileBtnEdit.classList.remove('active');
+            if (mobileBtnZoom) mobileBtnZoom.style.display = 'inline-flex';
             if (editorSidebarEl) editorSidebarEl.classList.add('mobile-hidden');
             if (previewAreaEl) previewAreaEl.classList.remove('mobile-hidden');
             renderPreview();
         });
+
+        if (mobileBtnZoom && paperEl) {
+            mobileBtnZoom.addEventListener('click', () => {
+                isZoomedIn = !isZoomedIn;
+                if (isZoomedIn) {
+                    paperEl.classList.add('mobile-zoomed');
+                    mobileBtnZoom.classList.add('active');
+                    if (zoomBtnText) zoomBtnText.textContent = 'Fit Page';
+                    mobileBtnZoom.querySelector('i').className = 'fa-solid fa-compress';
+                } else {
+                    paperEl.classList.remove('mobile-zoomed');
+                    mobileBtnZoom.classList.remove('active');
+                    if (zoomBtnText) zoomBtnText.textContent = 'Zoom In';
+                    mobileBtnZoom.querySelector('i').className = 'fa-solid fa-magnifying-glass-plus';
+                }
+            });
+        }
     }
 
     document.getElementById('resetDataBtn').addEventListener('click', () => {

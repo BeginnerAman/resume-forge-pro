@@ -1129,16 +1129,42 @@ body {
 
     .preview-area {
         width: 100% !important;
-        padding: 0.4rem 0;
+        padding: 0.6rem 0.25rem 2rem 0.25rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
     }
     .preview-area.mobile-hidden {
         display: none !important;
     }
 
-    /* Mobile Resume Paper Auto-Scaling */
+    /* Mobile Resume Paper Compact Scale (Fits 100% inside Mobile Viewport) */
     .resume-paper {
         margin: 0 auto !important;
+        transform: scale(0.44);
         transform-origin: top center;
+        margin-bottom: -160mm !important;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3) !important;
+        transition: transform 0.25s ease, margin-bottom 0.25s ease;
+    }
+
+    /* Mobile Zoomed In Mode (Zoom In = scale 0.82) */
+    .resume-paper.mobile-zoomed {
+        transform: scale(0.82) !important;
+        margin-bottom: -40mm !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .resume-paper {
+        transform: scale(0.41);
+        transform-origin: top center;
+        margin-bottom: -170mm !important;
+    }
+    .resume-paper.mobile-zoomed {
+        transform: scale(0.82) !important;
+        margin-bottom: -40mm !important;
     }
 }
