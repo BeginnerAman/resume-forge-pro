@@ -278,6 +278,29 @@ function attachEventListeners() {
         btnText.textContent = sidebar.classList.contains('collapsed') ? 'Show Editor' : 'Hide Editor';
     });
 
+    // Mobile View Tab Switcher (Edit Details vs View Resume)
+    const mobileBtnEdit = document.getElementById('mobileBtnEdit');
+    const mobileBtnPreview = document.getElementById('mobileBtnPreview');
+    const editorSidebarEl = document.getElementById('editorSidebar');
+    const previewAreaEl = document.querySelector('.preview-area');
+
+    if (mobileBtnEdit && mobileBtnPreview) {
+        mobileBtnEdit.addEventListener('click', () => {
+            mobileBtnEdit.classList.add('active');
+            mobileBtnPreview.classList.remove('active');
+            if (editorSidebarEl) editorSidebarEl.classList.remove('mobile-hidden');
+            if (previewAreaEl) previewAreaEl.classList.add('mobile-hidden');
+        });
+
+        mobileBtnPreview.addEventListener('click', () => {
+            mobileBtnPreview.classList.add('active');
+            mobileBtnEdit.classList.remove('active');
+            if (editorSidebarEl) editorSidebarEl.classList.add('mobile-hidden');
+            if (previewAreaEl) previewAreaEl.classList.remove('mobile-hidden');
+            renderPreview();
+        });
+    }
+
     document.getElementById('resetDataBtn').addEventListener('click', () => {
         if (confirm("Reset resume details to sample reference data?")) {
             currentData = JSON.parse(JSON.stringify(REFERENCE_DATA));

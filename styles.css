@@ -1024,3 +1024,121 @@ body {
     font-family: 'Inter', sans-serif;
     font-weight: 500;
 }
+
+/* ==========================================================================
+   STRICT MOBILE RESPONSIVE DESIGN (Screen Width <= 768px)
+   100% UNTOUCHED & ISOLATED FROM DESKTOP / LAPTOP VIEWS (> 768px)
+   ========================================================================== */
+
+/* Desktop Fallback: Hide mobile mode bar completely on desktop */
+.mobile-mode-bar {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    /* Compact Mobile Top Navigation Header */
+    .top-nav {
+        padding: 0.6rem 0.75rem;
+    }
+    .nav-container {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.55rem;
+    }
+    .brand {
+        justify-content: center;
+    }
+    .template-picker-wrapper {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    .template-picker-wrapper label {
+        font-size: 0.8rem;
+    }
+    .template-dropdown {
+        width: 100%;
+        max-width: 100%;
+        font-size: 0.81rem;
+    }
+    .actions {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.4rem;
+        width: 100%;
+    }
+    .actions .btn {
+        padding: 0.4rem 0.65rem;
+        font-size: 0.78rem;
+        flex: 1 1 calc(50% - 0.4rem);
+        justify-content: center;
+    }
+    #toggleEditBtn {
+        display: none !important;
+    }
+
+    /* Mobile Sticky Mode Tab Bar (Edit Details vs View Resume) */
+    .mobile-mode-bar {
+        display: flex !important;
+        position: sticky;
+        top: 0;
+        z-index: 999;
+        background: #0f172a;
+        padding: 0.4rem 0.6rem;
+        gap: 0.4rem;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        border-bottom: 1px solid #1e293b;
+    }
+    .mobile-mode-btn {
+        flex: 1;
+        background: #1e293b;
+        color: #94a3b8;
+        border: 1px solid #334155;
+        padding: 0.55rem 0.75rem;
+        border-radius: 6px;
+        font-size: 0.85rem;
+        font-weight: 700;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.45rem;
+        transition: all 0.2s ease;
+    }
+    .mobile-mode-btn.active {
+        background: #0284c7;
+        color: #ffffff;
+        border-color: #38bdf8;
+        box-shadow: 0 2px 8px rgba(2, 132, 199, 0.4);
+    }
+
+    /* Mobile Main Layout & Tab Toggle Views */
+    .main-layout {
+        flex-direction: column;
+        padding: 0.5rem 0.4rem;
+        gap: 0.6rem;
+    }
+    .editor-sidebar {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    .editor-sidebar.mobile-hidden {
+        display: none !important;
+    }
+
+    .preview-area {
+        width: 100% !important;
+        padding: 0.4rem 0;
+        overflow-x: auto;
+    }
+    .preview-area.mobile-hidden {
+        display: none !important;
+    }
+
+    /* Mobile Resume Paper Auto-Scaling */
+    .resume-paper {
+        margin: 0 auto !important;
+        transform-origin: top center;
+    }
+}
