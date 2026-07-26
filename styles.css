@@ -1134,47 +1134,36 @@ body {
 
     body.mobile-preview-active .preview-area {
         min-height: calc(100vh - 55px);
-        padding-top: 0.8rem;
+        padding: 0.4rem 0.2rem 2rem 0.2rem !important;
     }
 
     .preview-area {
         width: 100% !important;
-        padding: 0.6rem 0.25rem 2rem 0.25rem;
+        padding: 0.4rem 0.2rem 2rem 0.2rem !important;
         display: flex;
         flex-direction: column;
         align-items: center;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
+        overflow-x: hidden !important;
+        box-sizing: border-box !important;
     }
     .preview-area.mobile-hidden {
         display: none !important;
     }
 
-    /* Mobile Resume Paper Compact Scale (Fits 100% inside Mobile Viewport) */
+    /* Mobile Full-Width Resume Paper (Fills 100% Mobile Viewport Width cleanly) */
     .resume-paper {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 100% !important;
+        height: auto !important;
+        min-height: auto !important;
+        max-height: none !important;
+        padding: 12px 14px 18px 14px !important;
+        transform: none !important;
         margin: 0 auto !important;
-        transform: scale(0.44);
-        transform-origin: top center;
-        margin-bottom: -160mm !important;
-        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3) !important;
-        transition: transform 0.25s ease, margin-bottom 0.25s ease;
-    }
-
-    /* Mobile Zoomed In Mode (Zoom In = scale 0.82) */
-    .resume-paper.mobile-zoomed {
-        transform: scale(0.82) !important;
-        margin-bottom: -40mm !important;
-    }
-}
-
-@media (max-width: 480px) {
-    .resume-paper {
-        transform: scale(0.41);
-        transform-origin: top center;
-        margin-bottom: -170mm !important;
-    }
-    .resume-paper.mobile-zoomed {
-        transform: scale(0.82) !important;
-        margin-bottom: -40mm !important;
+        margin-bottom: 1rem !important;
+        box-shadow: 0 4px 18px rgba(0, 0, 0, 0.15) !important;
+        border-radius: 8px !important;
+        box-sizing: border-box !important;
     }
 }
