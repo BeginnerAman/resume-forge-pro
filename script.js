@@ -482,17 +482,24 @@ function applyMobilePaperScaling() {
     if (!paper) return;
 
     if (window.innerWidth <= 768) {
-        const availableW = window.innerWidth - 16;
-        const scaleRatio = Math.min(availableW / 794, 0.95);
-        
+        const screenW = window.innerWidth;
+        const availableW = screenW - 16;
+        const scaleRatio = Math.min(availableW / 794, 0.98);
+        const scaledW = 794 * scaleRatio;
+        const leftOffset = Math.max(0, Math.round((screenW - scaledW) / 2));
+
         paper.style.transform = `scale(${scaleRatio})`;
-        paper.style.transformOrigin = 'top center';
-        
+        paper.style.transformOrigin = '0 0';
+        paper.style.marginLeft = `${leftOffset}px`;
+        paper.style.marginRight = `0px`;
+
         const offsetBottom = Math.round(1115 * (1 - scaleRatio));
         paper.style.marginBottom = `-${offsetBottom}px`;
     } else {
         paper.style.transform = '';
         paper.style.transformOrigin = '';
+        paper.style.marginLeft = '';
+        paper.style.marginRight = '';
         paper.style.marginBottom = '';
     }
 }

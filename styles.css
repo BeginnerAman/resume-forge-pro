@@ -1142,13 +1142,11 @@ body {
     }
 
     .preview-area {
-        width: 100vw !important;
-        max-width: 100vw !important;
+        width: 100% !important;
+        max-width: 100% !important;
         padding: 0.5rem 0 2rem 0 !important;
         margin: 0 !important;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+        display: block !important;
         overflow-x: hidden !important;
         box-sizing: border-box !important;
     }
@@ -1164,7 +1162,6 @@ body {
         height: 295mm !important;
         min-height: 295mm !important;
         max-height: 295mm !important;
-        margin: 0 auto !important;
         box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2) !important;
         box-sizing: border-box !important;
         transition: transform 0.15s ease, margin-bottom 0.15s ease;
