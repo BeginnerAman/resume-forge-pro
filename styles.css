@@ -1139,31 +1139,38 @@ body {
 
     .preview-area {
         width: 100% !important;
-        padding: 0.4rem 0.2rem 2rem 0.2rem !important;
+        padding: 0.5rem 0.2rem 2rem 0.2rem !important;
         display: flex;
         flex-direction: column;
         align-items: center;
-        overflow-x: hidden !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch;
         box-sizing: border-box !important;
     }
     .preview-area.mobile-hidden {
         display: none !important;
     }
 
-    /* Mobile Full-Width Resume Paper (Fills 100% Mobile Viewport Width cleanly) */
+    /* Mobile Exact PDF Replica Scaling Engine (0% Text Reflow, 100% Exact PDF Geometry) */
     .resume-paper {
-        width: 100% !important;
-        max-width: 100% !important;
-        min-width: 100% !important;
-        height: auto !important;
-        min-height: auto !important;
-        max-height: none !important;
-        padding: 12px 14px 18px 14px !important;
-        transform: none !important;
+        width: 210mm !important;
+        min-width: 210mm !important;
+        max-width: 210mm !important;
+        height: 295mm !important;
+        min-height: 295mm !important;
+        max-height: 295mm !important;
+        zoom: calc((100vw - 12px) / 794);
         margin: 0 auto !important;
-        margin-bottom: 1rem !important;
-        box-shadow: 0 4px 18px rgba(0, 0, 0, 0.15) !important;
-        border-radius: 8px !important;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25) !important;
         box-sizing: border-box !important;
+    }
+
+    /* Safari iOS Fallback */
+    @supports not (zoom: 1) {
+        .resume-paper {
+            transform: scale(calc((100vw - 12px) / 794)) !important;
+            transform-origin: top center !important;
+            margin-bottom: calc(-1115px * (1 - ((100vw - 12px) / 794))) !important;
+        }
     }
 }
