@@ -1127,6 +1127,16 @@ body {
         display: none !important;
     }
 
+    /* Hide Top Action Header on Mobile when viewing Resume to dedicate 100% screen to preview */
+    body.mobile-preview-active .top-nav {
+        display: none !important;
+    }
+
+    body.mobile-preview-active .preview-area {
+        min-height: calc(100vh - 55px);
+        padding-top: 0.8rem;
+    }
+
     .preview-area {
         width: 100% !important;
         padding: 0.6rem 0.25rem 2rem 0.25rem;

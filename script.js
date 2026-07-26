@@ -278,10 +278,11 @@ function attachEventListeners() {
         btnText.textContent = sidebar.classList.contains('collapsed') ? 'Show Editor' : 'Hide Editor';
     });
 
-    // Mobile View Tab Switcher (Edit Details vs View Resume vs Zoom)
+    // Mobile View Tab Switcher (Edit Details vs View Resume vs Zoom vs PDF)
     const mobileBtnEdit = document.getElementById('mobileBtnEdit');
     const mobileBtnPreview = document.getElementById('mobileBtnPreview');
     const mobileBtnZoom = document.getElementById('mobileBtnZoom');
+    const mobileBtnPdf = document.getElementById('mobileBtnPdf');
     const zoomBtnText = document.getElementById('zoomBtnText');
     const editorSidebarEl = document.getElementById('editorSidebar');
     const previewAreaEl = document.querySelector('.preview-area');
@@ -294,6 +295,8 @@ function attachEventListeners() {
             mobileBtnEdit.classList.add('active');
             mobileBtnPreview.classList.remove('active');
             if (mobileBtnZoom) mobileBtnZoom.style.display = 'none';
+            if (mobileBtnPdf) mobileBtnPdf.style.display = 'none';
+            document.body.classList.remove('mobile-preview-active');
             if (editorSidebarEl) editorSidebarEl.classList.remove('mobile-hidden');
             if (previewAreaEl) previewAreaEl.classList.add('mobile-hidden');
         });
@@ -302,6 +305,8 @@ function attachEventListeners() {
             mobileBtnPreview.classList.add('active');
             mobileBtnEdit.classList.remove('active');
             if (mobileBtnZoom) mobileBtnZoom.style.display = 'inline-flex';
+            if (mobileBtnPdf) mobileBtnPdf.style.display = 'inline-flex';
+            document.body.classList.add('mobile-preview-active');
             if (editorSidebarEl) editorSidebarEl.classList.add('mobile-hidden');
             if (previewAreaEl) previewAreaEl.classList.remove('mobile-hidden');
             renderPreview();
@@ -321,6 +326,13 @@ function attachEventListeners() {
                     if (zoomBtnText) zoomBtnText.textContent = 'Zoom In';
                     mobileBtnZoom.querySelector('i').className = 'fa-solid fa-magnifying-glass-plus';
                 }
+            });
+        }
+
+        if (mobileBtnPdf) {
+            mobileBtnPdf.addEventListener('click', () => {
+                const pdfBtn = document.getElementById('downloadPdfBtn');
+                if (pdfBtn) pdfBtn.click();
             });
         }
     }
