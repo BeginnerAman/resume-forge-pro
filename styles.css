@@ -1156,7 +1156,7 @@ body {
         display: none !important;
     }
 
-    /* Mobile Zero-Clipping PDF Replica Fit Engine (0% Text Reflow, 100% Visible Borders) */
+    /* Mobile Dynamic Real-Time PDF Replica Scaling Engine */
     .resume-paper {
         width: 210mm !important;
         min-width: 210mm !important;
@@ -1164,18 +1164,9 @@ body {
         height: 295mm !important;
         min-height: 295mm !important;
         max-height: 295mm !important;
-        zoom: calc((100vw - 28px) / 794) !important;
         margin: 0 auto !important;
         box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2) !important;
         box-sizing: border-box !important;
-    }
-
-    /* Safari iOS Fallback */
-    @supports not (zoom: 1) {
-        .resume-paper {
-            transform: scale(calc((100vw - 28px) / 794)) !important;
-            transform-origin: top center !important;
-            margin-bottom: calc(-1115px * (1 - ((100vw - 28px) / 794))) !important;
-        }
+        transition: transform 0.15s ease, margin-bottom 0.15s ease;
     }
 }

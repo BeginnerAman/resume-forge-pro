@@ -477,6 +477,30 @@ function autoFitResumePaper() {
     }, 400);
 }
 
+function applyMobilePaperScaling() {
+    const paper = document.getElementById('resumePaper');
+    if (!paper) return;
+
+    if (window.innerWidth <= 768) {
+        const availableW = window.innerWidth - 16;
+        const scaleRatio = Math.min(availableW / 794, 0.95);
+        
+        paper.style.transform = `scale(${scaleRatio})`;
+        paper.style.transformOrigin = 'top center';
+        
+        const offsetBottom = Math.round(1115 * (1 - scaleRatio));
+        paper.style.marginBottom = `-${offsetBottom}px`;
+    } else {
+        paper.style.transform = '';
+        paper.style.transformOrigin = '';
+        paper.style.marginBottom = '';
+    }
+}
+
+if (typeof window !== 'undefined' && window.addEventListener) {
+    window.addEventListener('resize', applyMobilePaperScaling);
+}
+
 function renderPreview() {
     const paper = document.getElementById('resumePaper');
     if (!paper) return;
@@ -553,6 +577,7 @@ function renderPreview() {
     }
 
     setTimeout(autoFitResumePaper, 50);
+    applyMobilePaperScaling();
 }
 
 /* TEMPLATE 1: CLASSIC REFERENCE */
