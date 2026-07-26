@@ -1134,24 +1134,24 @@ body {
 
     body.mobile-preview-active .preview-area {
         min-height: calc(100vh - 55px);
-        padding: 0.4rem 0.2rem 2rem 0.2rem !important;
+        padding: 0.4rem 0 2rem 0 !important;
     }
 
     .preview-area {
-        width: 100% !important;
-        padding: 0.5rem 0.2rem 2rem 0.2rem !important;
+        width: 100vw !important;
+        max-width: 100vw !important;
+        padding: 0.4rem 0 2rem 0 !important;
         display: flex;
         flex-direction: column;
         align-items: center;
-        overflow-x: auto !important;
-        -webkit-overflow-scrolling: touch;
+        overflow-x: hidden !important;
         box-sizing: border-box !important;
     }
     .preview-area.mobile-hidden {
         display: none !important;
     }
 
-    /* Mobile Exact PDF Replica Scaling Engine (0% Text Reflow, 100% Exact PDF Geometry) */
+    /* Mobile Adobe PDF Viewer Zero-Side-Scroll Fit-to-Width Scaling Engine */
     .resume-paper {
         width: 210mm !important;
         min-width: 210mm !important;
@@ -1159,18 +1159,18 @@ body {
         height: 295mm !important;
         min-height: 295mm !important;
         max-height: 295mm !important;
-        zoom: calc((100vw - 12px) / 794);
+        zoom: calc(100vw / 794) !important;
         margin: 0 auto !important;
-        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25) !important;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2) !important;
         box-sizing: border-box !important;
     }
 
     /* Safari iOS Fallback */
     @supports not (zoom: 1) {
         .resume-paper {
-            transform: scale(calc((100vw - 12px) / 794)) !important;
+            transform: scale(calc(100vw / 794)) !important;
             transform-origin: top center !important;
-            margin-bottom: calc(-1115px * (1 - ((100vw - 12px) / 794))) !important;
+            margin-bottom: calc(-1115px * (1 - (100vw / 794))) !important;
         }
     }
 }
