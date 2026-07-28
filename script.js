@@ -520,6 +520,12 @@ function renderPreview() {
                       (isSuper ? ' compact-super' : '');
 
     switch (currentTemplate) {
+        case 'template-21':
+            paper.innerHTML = renderTemplate21HTML(currentData);
+            break;
+        case 'template-22':
+            paper.innerHTML = renderTemplate22HTML(currentData);
+            break;
         case 'template-17':
             paper.innerHTML = renderTemplate17HTML(currentData);
             break;
@@ -2450,6 +2456,195 @@ function renderTemplate20HTML(data) {
                     ${data.personal?.gender ? `<div><strong>Gender:</strong> ${escapeHtml(data.personal.gender)}</div>` : ''}
                     ${guardianValue ? `<div><strong>${guardianLabel}:</strong> ${escapeHtml(guardianValue)}</div>` : ''}
                     ${data.personal?.marital ? `<div><strong>Status:</strong> ${escapeHtml(data.personal.marital)}</div>` : ''}
+                    ${data.personal?.languages ? `<div><strong>Languages:</strong> ${escapeHtml(data.personal.languages)}</div>` : ''}
+                    ${data.personal?.hobbies ? `<div><strong>Hobbies:</strong> ${escapeHtml(data.personal.hobbies)}</div>` : ''}
+                </div>
+            </section>
+        </div>
+    `;
+}
+
+/* TEMPLATE 21: SILICON VALLEY VP */
+function renderTemplate21HTML(data) {
+    const { guardianLabel, guardianValue } = getGuardianDetails(data);
+
+    return `
+        <div class="tmpl21-container">
+            <header class="tmpl21-header">
+                <div class="tmpl21-hleft">
+                    <div class="tmpl21-badge-tag"><i class="fa-solid fa-crown"></i> EXECUTIVE BRIEF</div>
+                    <h1 class="tmpl21-name">${escapeHtml(data.name || 'YOUR NAME')}</h1>
+                    <p class="tmpl21-tagline">${escapeHtml(data.tagline || '')}</p>
+                    <div class="tmpl21-contacts">
+                        ${data.mobile ? `<span><i class="fa-solid fa-mobile-screen-button"></i> ${escapeHtml(data.mobile)}</span>` : ''}
+                        ${data.email ? `<span><i class="fa-solid fa-envelope"></i> ${escapeHtml(data.email)}</span>` : ''}
+                        ${data.address ? `<span><i class="fa-solid fa-location-dot"></i> ${escapeHtml(data.address)}</span>` : ''}
+                    </div>
+                </div>
+                <div class="tmpl21-photo">
+                    <img src="${data.photo || 'profile_sarah.jpg'}" alt="Photo" onerror="this.src='https://via.placeholder.com/90x105?text=Photo'">
+                </div>
+            </header>
+
+            ${data.objective ? `
+                <section class="tmpl21-sec">
+                    <h2 class="tmpl21-sec-title"><i class="fa-solid fa-compass"></i> EXECUTIVE SUMMARY</h2>
+                    <p class="tmpl21-text">${escapeHtml(data.objective)}</p>
+                </section>
+            ` : ''}
+
+            ${(data.education && data.education.length > 0) ? `
+                <section class="tmpl21-sec">
+                    <h2 class="tmpl21-sec-title"><i class="fa-solid fa-graduation-cap"></i> EDUCATION & ACADEMIC CREDENTIALS</h2>
+                    <div class="tmpl21-edu-list">
+                        ${data.education.map(e => `
+                            <div class="tmpl21-edu-card">
+                                <div class="tmpl21-edu-top">
+                                    <span class="tmpl21-edu-qual">${escapeHtml(e.qual)}</span>
+                                    <span class="tmpl21-edu-year">${escapeHtml(e.year)}</span>
+                                </div>
+                                <div class="tmpl21-edu-inst">${escapeHtml(e.inst)}</div>
+                                ${e.marks ? `<div class="tmpl21-edu-score">Score: <strong>${escapeHtml(e.marks)}</strong></div>` : ''}
+                            </div>
+                        `).join('')}
+                    </div>
+                </section>
+            ` : ''}
+
+            ${(data.skills && data.skills.filter(s => s && s.trim()).length > 0) ? `
+                <section class="tmpl21-sec">
+                    <h2 class="tmpl21-sec-title"><i class="fa-solid fa-layer-group"></i> CORE COMPETENCIES & EXPERTISE</h2>
+                    <div class="tmpl21-skills-grid">
+                        ${data.skills.filter(s => s && s.trim()).map(s => `<div class="tmpl21-skill-card"><i class="fa-solid fa-square-check"></i> ${escapeHtml(s)}</div>`).join('')}
+                    </div>
+                </section>
+            ` : ''}
+
+            ${(data.certifications && data.certifications.filter(c => c && c.trim()).length > 0) ? `
+                <section class="tmpl21-sec">
+                    <h2 class="tmpl21-sec-title"><i class="fa-solid fa-award"></i> PROFESSIONAL CERTIFICATIONS</h2>
+                    <ul class="tmpl21-list">
+                        ${data.certifications.filter(c => c && c.trim()).map(c => `<li>${escapeHtml(c)}</li>`).join('')}
+                    </ul>
+                </section>
+            ` : ''}
+
+            ${(data.achievements && data.achievements.filter(a => a && a.trim()).length > 0) ? `
+                <section class="tmpl21-sec">
+                    <h2 class="tmpl21-sec-title"><i class="fa-solid fa-trophy"></i> KEY ACHIEVEMENTS & MILESTONES</h2>
+                    <ul class="tmpl21-list">
+                        ${data.achievements.filter(a => a && a.trim()).map(a => `<li>${escapeHtml(a)}</li>`).join('')}
+                    </ul>
+                </section>
+            ` : ''}
+
+            <section class="tmpl21-sec">
+                <h2 class="tmpl21-sec-title"><i class="fa-solid fa-address-card"></i> PERSONAL PROFILE & INFORMATION</h2>
+                <div class="tmpl21-personal-box">
+                    ${data.personal?.dob ? `<div><strong>Date of Birth:</strong> ${escapeHtml(data.personal.dob)}</div>` : ''}
+                    ${data.personal?.gender ? `<div><strong>Gender:</strong> ${escapeHtml(data.personal.gender)}</div>` : ''}
+                    ${guardianValue ? `<div><strong>${guardianLabel}:</strong> ${escapeHtml(guardianValue)}</div>` : ''}
+                    ${data.personal?.marital ? `<div><strong>Marital Status:</strong> ${escapeHtml(data.personal.marital)}</div>` : ''}
+                    ${data.personal?.languages ? `<div><strong>Languages:</strong> ${escapeHtml(data.personal.languages)}</div>` : ''}
+                    ${data.personal?.hobbies ? `<div><strong>Hobbies:</strong> ${escapeHtml(data.personal.hobbies)}</div>` : ''}
+                </div>
+            </section>
+        </div>
+    `;
+}
+
+/* TEMPLATE 22: MANHATTAN BOARD DIRECTOR */
+function renderTemplate22HTML(data) {
+    const { guardianLabel, guardianValue } = getGuardianDetails(data);
+
+    return `
+        <div class="tmpl22-container">
+            <header class="tmpl22-header">
+                <div class="tmpl22-hleft">
+                    <h1 class="tmpl22-name">${escapeHtml(data.name || 'YOUR NAME')}</h1>
+                    <p class="tmpl22-tagline">${escapeHtml(data.tagline || '')}</p>
+                    <div class="tmpl22-contacts">
+                        ${data.mobile ? `<span><i class="fa-solid fa-phone"></i> ${escapeHtml(data.mobile)}</span>` : ''}
+                        ${data.email ? `<span><i class="fa-solid fa-envelope"></i> ${escapeHtml(data.email)}</span>` : ''}
+                        ${data.address ? `<span><i class="fa-solid fa-location-pin"></i> ${escapeHtml(data.address)}</span>` : ''}
+                    </div>
+                </div>
+                <div class="tmpl22-photo">
+                    <img src="${data.photo || 'profile_sarah.jpg'}" alt="Photo" onerror="this.src='https://via.placeholder.com/90x105?text=Photo'">
+                </div>
+            </header>
+
+            <div class="tmpl22-gold-divider"></div>
+
+            ${data.objective ? `
+                <section class="tmpl22-sec">
+                    <h2 class="tmpl22-title">BOARD EXECUTIVE STATEMENT</h2>
+                    <div class="tmpl22-bio-card">
+                        <p class="tmpl22-text">${escapeHtml(data.objective)}</p>
+                    </div>
+                </section>
+            ` : ''}
+
+            ${(data.education && data.education.length > 0) ? `
+                <section class="tmpl22-sec">
+                    <h2 class="tmpl22-title">ACADEMIC & PROFESSIONAL CREDENTIALS</h2>
+                    <table class="tmpl22-table">
+                        <thead>
+                            <tr>
+                                <th>Degree / Qualification</th>
+                                <th>Institution / University</th>
+                                <th>Year</th>
+                                <th>Result / Score</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${data.education.map(e => `
+                                <tr>
+                                    <td><strong>${escapeHtml(e.qual)}</strong></td>
+                                    <td>${escapeHtml(e.inst)}</td>
+                                    <td>${escapeHtml(e.year)}</td>
+                                    <td><span class="tmpl22-badge">${escapeHtml(e.marks)}</span></td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                </section>
+            ` : ''}
+
+            ${(data.skills && data.skills.filter(s => s && s.trim()).length > 0) ? `
+                <section class="tmpl22-sec">
+                    <h2 class="tmpl22-title">CORE GOVERNANCE & PROFESSIONAL SKILLS</h2>
+                    <div class="tmpl22-skills">
+                        ${data.skills.filter(s => s && s.trim()).map(s => `<span class="tmpl22-skill-pill"><i class="fa-solid fa-check"></i> ${escapeHtml(s)}</span>`).join('')}
+                    </div>
+                </section>
+            ` : ''}
+
+            ${(data.certifications && data.certifications.filter(c => c && c.trim()).length > 0) ? `
+                <section class="tmpl22-sec">
+                    <h2 class="tmpl22-title">PROFESSIONAL LICENSES & CERTIFICATIONS</h2>
+                    <ul class="tmpl22-list">
+                        ${data.certifications.filter(c => c && c.trim()).map(c => `<li>${escapeHtml(c)}</li>`).join('')}
+                    </ul>
+                </section>
+            ` : ''}
+
+            ${(data.achievements && data.achievements.filter(a => a && a.trim()).length > 0) ? `
+                <section class="tmpl22-sec">
+                    <h2 class="tmpl22-title">BOARD ENGAGEMENTS & HONORS</h2>
+                    <ul class="tmpl22-list">
+                        ${data.achievements.filter(a => a && a.trim()).map(a => `<li>${escapeHtml(a)}</li>`).join('')}
+                    </ul>
+                </section>
+            ` : ''}
+
+            <section class="tmpl22-sec">
+                <h2 class="tmpl22-title">PERSONAL BIODATA</h2>
+                <div class="tmpl22-personal-grid">
+                    ${data.personal?.dob ? `<div><strong>Date of Birth:</strong> ${escapeHtml(data.personal.dob)}</div>` : ''}
+                    ${data.personal?.gender ? `<div><strong>Gender:</strong> ${escapeHtml(data.personal.gender)}</div>` : ''}
+                    ${guardianValue ? `<div><strong>${guardianLabel}:</strong> ${escapeHtml(guardianValue)}</div>` : ''}
+                    ${data.personal?.marital ? `<div><strong>Marital Status:</strong> ${escapeHtml(data.personal.marital)}</div>` : ''}
                     ${data.personal?.languages ? `<div><strong>Languages:</strong> ${escapeHtml(data.personal.languages)}</div>` : ''}
                     ${data.personal?.hobbies ? `<div><strong>Hobbies:</strong> ${escapeHtml(data.personal.hobbies)}</div>` : ''}
                 </div>
