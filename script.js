@@ -348,6 +348,13 @@ function attachEventListeners() {
         btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Generating 4K PDF...`;
         btn.disabled = true;
 
+        // Full-screen loading overlay — masks any layout changes during PDF capture
+        const overlay = document.createElement('div');
+        overlay.id = 'pdfGeneratingOverlay';
+        overlay.style.cssText = 'position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(15,23,42,0.96);z-index:99999;display:flex;align-items:center;justify-content:center;flex-direction:column;color:#fff;font-family:inherit;';
+        overlay.innerHTML = '<i class="fa-solid fa-spinner fa-spin" style="font-size:2rem;margin-bottom:1rem;color:#38bdf8;"></i><div style="font-size:1.1rem;font-weight:600;">Generating 4K PDF...</div><div style="font-size:0.85rem;color:#94a3b8;margin-top:0.5rem;">Please wait</div>';
+        document.body.appendChild(overlay);
+
         try {
             if (document.fonts && document.fonts.ready) {
                 await document.fonts.ready;
@@ -357,6 +364,23 @@ function attachEventListeners() {
             const cleanName = (currentData.name || 'Resume').trim().replace(/[^a-zA-Z0-9]/g, '_');
             const filename = `${cleanName}_Resume.pdf`;
 
+            // Strip mobile transforms so element is at native A4 size (210mm x 295mm)
+            // Overlay hides this from the user — zero visible jitter
+            const savedTransform = element.style.transform;
+            const savedOrigin = element.style.transformOrigin;
+            const savedML = element.style.marginLeft;
+            const savedMR = element.style.marginRight;
+            const savedMB = element.style.marginBottom;
+
+            element.style.transform = 'none';
+            element.style.transformOrigin = 'initial';
+            element.style.marginLeft = '0';
+            element.style.marginRight = '0';
+            element.style.marginBottom = '0';
+
+            // Wait for browser to repaint at native A4 size
+            await new Promise(r => setTimeout(r, 200));
+
             const opt = {
                 margin:       0,
                 filename:     filename,
@@ -365,20 +389,7 @@ function attachEventListeners() {
                     scale: 4,
                     useCORS: true, 
                     logging: false,
-                    scrollY: 0,
-                    onclone: function(clonedDoc) {
-                        // Strip mobile scale transforms from html2canvas's internal clone
-                        // so PDF renders at native A4 size (210mm x 295mm).
-                        // This does NOT touch the actual screen element at all.
-                        var paper = clonedDoc.getElementById('resumePaper');
-                        if (paper) {
-                            paper.style.transform = 'none';
-                            paper.style.transformOrigin = 'initial';
-                            paper.style.marginLeft = '0';
-                            paper.style.marginRight = '0';
-                            paper.style.marginBottom = '0';
-                        }
-                    }
+                    scrollY: 0
                 },
                 jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' },
                 pagebreak:    { mode: ['avoid-all', 'css'] }
@@ -392,10 +403,26 @@ function attachEventListeners() {
                     }
                 }
             }).save();
+
         } catch (err) {
             console.error('PDF Export Error:', err);
             alert('Failed to export PDF.');
         } finally {
+            // Restore mobile transforms
+            const element = document.getElementById('resumePaper');
+            if (element) {
+                element.style.transform = '';
+                element.style.transformOrigin = '';
+                element.style.marginLeft = '';
+                element.style.marginRight = '';
+                element.style.marginBottom = '';
+            }
+            applyMobilePaperScaling();
+
+            // Remove overlay
+            const ov = document.getElementById('pdfGeneratingOverlay');
+            if (ov) ov.remove();
+
             btn.innerHTML = originalHtml;
             btn.disabled = false;
         }
