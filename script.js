@@ -357,22 +357,6 @@ function attachEventListeners() {
             const cleanName = (currentData.name || 'Resume').trim().replace(/[^a-zA-Z0-9]/g, '_');
             const filename = `${cleanName}_Resume.pdf`;
 
-            // Save and strip any mobile transforms / margins that would corrupt the capture
-            const savedTransform = element.style.transform;
-            const savedOrigin = element.style.transformOrigin;
-            const savedML = element.style.marginLeft;
-            const savedMR = element.style.marginRight;
-            const savedMB = element.style.marginBottom;
-
-            element.style.transform = 'none';
-            element.style.transformOrigin = '';
-            element.style.marginLeft = '';
-            element.style.marginRight = '';
-            element.style.marginBottom = '';
-
-            // Brief pause so the browser repaints without transforms
-            await new Promise(r => setTimeout(r, 100));
-
             const opt = {
                 margin:       0,
                 filename:     filename,
@@ -381,11 +365,7 @@ function attachEventListeners() {
                     scale: 4, // 384 DPI Ultra Sharp Render
                     useCORS: true, 
                     logging: false,
-                    scrollY: 0,
-                    width: element.scrollWidth,
-                    height: element.scrollHeight,
-                    windowWidth: element.scrollWidth,
-                    windowHeight: element.scrollHeight
+                    scrollY: 0
                 },
                 jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' },
                 pagebreak:    { mode: ['avoid-all', 'css'] }
@@ -399,19 +379,9 @@ function attachEventListeners() {
                     }
                 }
             }).save();
-
-            // Restore mobile transforms after capture
-            element.style.transform = savedTransform;
-            element.style.transformOrigin = savedOrigin;
-            element.style.marginLeft = savedML;
-            element.style.marginRight = savedMR;
-            element.style.marginBottom = savedMB;
-
         } catch (err) {
             console.error('PDF Export Error:', err);
             alert('Failed to export PDF.');
-            // Restore scaling even on error
-            applyMobilePaperScaling();
         } finally {
             btn.innerHTML = originalHtml;
             btn.disabled = false;
