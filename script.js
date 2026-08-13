@@ -370,10 +370,12 @@ function attachEventListeners() {
             clone.style.marginBottom = '0';
             clone.style.boxShadow = 'none';
             
-            // Position off-screen so the user sees absolutely no visual shift
-            clone.style.position = 'absolute';
-            clone.style.left = '-9999px';
-            clone.style.top = '-9999px';
+            // Position behind current UI so html2canvas can measure and capture it in active viewport
+            clone.style.position = 'fixed';
+            clone.style.left = '0';
+            clone.style.top = '0';
+            clone.style.zIndex = '-9999';
+            clone.style.pointerEvents = 'none';
             
             document.body.appendChild(clone);
 
