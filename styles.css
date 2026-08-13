@@ -697,7 +697,7 @@ body {
         overflow: hidden !important;
     }
 
-    .no-print, .top-nav, .editor-sidebar { display: none !important; }
+    .no-print, .top-nav, .editor-sidebar, .mobile-mode-bar, .app-footer { display: none !important; }
     .main-layout { margin: 0 !important; padding: 0 !important; max-width: 100% !important; width: 100% !important; }
     .preview-area { padding: 0 !important; margin: 0 !important; overflow: visible !important; width: 100% !important; }
 
