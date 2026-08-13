@@ -348,7 +348,6 @@ function attachEventListeners() {
         btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Generating 4K PDF...`;
         btn.disabled = true;
 
-        let clone = null;
         try {
             if (document.fonts && document.fonts.ready) {
                 await document.fonts.ready;
@@ -357,30 +356,6 @@ function attachEventListeners() {
             const element = document.getElementById('resumePaper');
             const cleanName = (currentData.name || 'Resume').trim().replace(/[^a-zA-Z0-9]/g, '_');
             const filename = `${cleanName}_Resume.pdf`;
-
-            // Create off-screen clone to prevent any screen layout shifting or zoom glitches
-            clone = element.cloneNode(true);
-            clone.id = 'resumePaperClone';
-            
-            // Clean styles for perfect native A4 size rendering
-            clone.style.transform = 'none';
-            clone.style.transformOrigin = '';
-            clone.style.marginLeft = '0';
-            clone.style.marginRight = '0';
-            clone.style.marginBottom = '0';
-            clone.style.boxShadow = 'none';
-            
-            // Position behind current UI so html2canvas can measure and capture it in active viewport
-            clone.style.position = 'fixed';
-            clone.style.left = '0';
-            clone.style.top = '0';
-            clone.style.zIndex = '-9999';
-            clone.style.pointerEvents = 'none';
-            
-            document.body.appendChild(clone);
-
-            // Brief pause for browser rendering thread
-            await new Promise(r => setTimeout(r, 100));
 
             const opt = {
                 margin:       0,
@@ -391,14 +366,25 @@ function attachEventListeners() {
                     useCORS: true, 
                     logging: false,
                     scrollY: 0,
-                    width: clone.scrollWidth,
-                    height: clone.scrollHeight
+                    onclone: function(clonedDoc) {
+                        // Strip mobile scale transforms from html2canvas's internal clone
+                        // so PDF renders at native A4 size (210mm x 295mm).
+                        // This does NOT touch the actual screen element at all.
+                        var paper = clonedDoc.getElementById('resumePaper');
+                        if (paper) {
+                            paper.style.transform = 'none';
+                            paper.style.transformOrigin = 'initial';
+                            paper.style.marginLeft = '0';
+                            paper.style.marginRight = '0';
+                            paper.style.marginBottom = '0';
+                        }
+                    }
                 },
                 jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' },
                 pagebreak:    { mode: ['avoid-all', 'css'] }
             };
 
-            await html2pdf().set(opt).from(clone).toPdf().get('pdf').then(function (pdf) {
+            await html2pdf().set(opt).from(element).toPdf().get('pdf').then(function (pdf) {
                 const totalPages = pdf.internal.getNumberOfPages();
                 if (totalPages > 1) {
                     for (let i = totalPages; i > 1; i--) {
@@ -406,15 +392,10 @@ function attachEventListeners() {
                     }
                 }
             }).save();
-
         } catch (err) {
             console.error('PDF Export Error:', err);
             alert('Failed to export PDF.');
         } finally {
-            // Clean up the clone
-            if (clone) {
-                clone.remove();
-            }
             btn.innerHTML = originalHtml;
             btn.disabled = false;
         }
