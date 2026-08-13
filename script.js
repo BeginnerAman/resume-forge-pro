@@ -4,7 +4,7 @@ const REFERENCE_DATA = {
     tagline: "Aspiring SST & Geography Teacher | B.Ed. Graduate",
     mobile: "+91 98765 43210",
     email: "example@email.com",
-    address: "Vill. Sihatikar, Post Bakhira, Tehsil Khalilabad, Dist. Sant Kabir Nagar, U.P. - 272199",
+    address: "Near Gorakhnath Temple, Golghar, Gorakhpur, U.P. - 273015",
     photo: "profile_sarah.jpg",
     objective: "An enthusiastic and dedicated B.Ed. & M.A. graduate seeking a Social Studies (SST) & Geography teaching position. Passionate about student development, academic excellence, interactive map/globe teaching, and creating an engaging classroom environment.",
     education: [
