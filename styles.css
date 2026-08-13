@@ -681,51 +681,6 @@ body {
 .tmpl12-list { padding-left: 1.2rem; font-size: 0.81rem; color: #065f46; }
 .tmpl12-list li { margin-bottom: 0.22rem; }
 
-/* Print Styles - Guaranteed 1 Page Fit & Color Preservation */
-@media print {
-    * {
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
-        color-adjust: exact !important;
-    }
-
-    html, body {
-        height: 100% !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        background: white !important;
-        overflow: hidden !important;
-    }
-
-    .no-print, .top-nav, .editor-sidebar, .mobile-mode-bar, .app-footer { display: none !important; }
-    .main-layout { margin: 0 !important; padding: 0 !important; max-width: 100% !important; width: 100% !important; }
-    .preview-area { padding: 0 !important; margin: 0 !important; overflow: visible !important; width: 100% !important; }
-
-    .resume-paper {
-        box-shadow: none !important;
-        width: 100% !important;
-        height: 295mm !important;
-        max-height: 295mm !important;
-        min-height: auto !important;
-        margin: 0 !important;
-        border: none !important;
-        border-radius: 0 !important;
-        box-sizing: border-box !important;
-        page-break-after: avoid !important;
-        page-break-inside: avoid !important;
-        overflow: hidden !important;
-    }
-
-    .tmpl2-layout { height: 295mm !important; max-height: 295mm !important; }
-    .tmpl2-sidebar { padding: 8mm 6mm !important; -webkit-print-color-adjust: exact !important; }
-    .tmpl2-main { padding: 8mm 8mm !important; }
-    .tmpl4-banner, .tmpl5-header, .tmpl8-banner { -webkit-print-color-adjust: exact !important; }
-
-    @page {
-        size: A4 portrait;
-        margin: 0mm;
-    }
-}
 
 /* Screen Responsiveness */
 @media (max-width: 1024px) {
@@ -1250,5 +1205,56 @@ body {
         box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2) !important;
         box-sizing: border-box !important;
         transition: transform 0.15s ease, margin-bottom 0.15s ease;
+    }
+}
+
+/* ==========================================================================
+   PRINT STYLES — MUST BE LAST to override all mobile/responsive rules
+   ========================================================================== */
+@media print {
+    * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        color-adjust: exact !important;
+    }
+
+    html, body {
+        height: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        background: white !important;
+        overflow: hidden !important;
+    }
+
+    .no-print, .top-nav, .editor-sidebar, .mobile-mode-bar, .app-footer { display: none !important; }
+    .main-layout { margin: 0 !important; padding: 0 !important; max-width: 100% !important; width: 100% !important; }
+    .preview-area { padding: 0 !important; margin: 0 !important; overflow: visible !important; width: 100% !important; display: block !important; }
+    .preview-area.mobile-hidden { display: block !important; }
+
+    .resume-paper {
+        box-shadow: none !important;
+        width: 100% !important;
+        height: 295mm !important;
+        max-height: 295mm !important;
+        min-height: auto !important;
+        margin: 0 !important;
+        border: none !important;
+        border-radius: 0 !important;
+        box-sizing: border-box !important;
+        page-break-after: avoid !important;
+        page-break-inside: avoid !important;
+        overflow: hidden !important;
+        transform: none !important;
+        transform-origin: initial !important;
+    }
+
+    .tmpl2-layout { height: 295mm !important; max-height: 295mm !important; }
+    .tmpl2-sidebar { padding: 8mm 6mm !important; -webkit-print-color-adjust: exact !important; }
+    .tmpl2-main { padding: 8mm 8mm !important; }
+    .tmpl4-banner, .tmpl5-header, .tmpl8-banner { -webkit-print-color-adjust: exact !important; }
+
+    @page {
+        size: A4 portrait;
+        margin: 0mm;
     }
 }
