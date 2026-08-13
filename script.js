@@ -409,19 +409,18 @@ function attachEventListeners() {
             alert('Failed to export PDF.');
         } finally {
             // Restore mobile transforms
-            const element = document.getElementById('resumePaper');
-            if (element) {
-                element.style.transform = '';
-                element.style.transformOrigin = '';
-                element.style.marginLeft = '';
-                element.style.marginRight = '';
-                element.style.marginBottom = '';
+            const paperEl = document.getElementById('resumePaper');
+            if (paperEl) {
+                paperEl.style.transform = '';
+                paperEl.style.transformOrigin = '';
+                paperEl.style.marginLeft = '';
+                paperEl.style.marginRight = '';
+                paperEl.style.marginBottom = '';
             }
             applyMobilePaperScaling();
 
             // Remove overlay
-            const ov = document.getElementById('pdfGeneratingOverlay');
-            if (ov) ov.remove();
+            if (overlay) overlay.remove();
 
             btn.innerHTML = originalHtml;
             btn.disabled = false;
