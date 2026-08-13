@@ -357,15 +357,42 @@ function attachEventListeners() {
             const cleanName = (currentData.name || 'Resume').trim().replace(/[^a-zA-Z0-9]/g, '_');
             const filename = `${cleanName}_Resume.pdf`;
 
+            // --- PRE-CAPTURE CLEANUP ---
+            // 1. Hide mobile-mode-bar and footer so they don't appear in captured image
+            const mobileBar = document.querySelector('.mobile-mode-bar');
+            const appFooter = document.querySelector('.app-footer');
+            const barDisplay = mobileBar ? mobileBar.style.display : '';
+            const footerDisplay = appFooter ? appFooter.style.display : '';
+            if (mobileBar) mobileBar.style.display = 'none';
+            if (appFooter) appFooter.style.display = 'none';
+
+            // 2. Strip mobile scale transforms that corrupt html2canvas rendering
+            const savedTransform = element.style.transform;
+            const savedOrigin = element.style.transformOrigin;
+            const savedML = element.style.marginLeft;
+            const savedMR = element.style.marginRight;
+            const savedMB = element.style.marginBottom;
+
+            element.style.transform = 'none';
+            element.style.transformOrigin = '';
+            element.style.marginLeft = '0';
+            element.style.marginRight = '0';
+            element.style.marginBottom = '0';
+
+            // Let browser repaint at native 210mm x 295mm size
+            await new Promise(r => setTimeout(r, 150));
+
             const opt = {
                 margin:       0,
                 filename:     filename,
                 image:        { type: 'jpeg', quality: 1.0 },
                 html2canvas:  { 
-                    scale: 4, // 384 DPI Ultra Sharp Render
+                    scale: 4,
                     useCORS: true, 
                     logging: false,
-                    scrollY: 0
+                    scrollY: 0,
+                    width: element.scrollWidth,
+                    height: element.scrollHeight
                 },
                 jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' },
                 pagebreak:    { mode: ['avoid-all', 'css'] }
@@ -379,10 +406,32 @@ function attachEventListeners() {
                     }
                 }
             }).save();
+
         } catch (err) {
             console.error('PDF Export Error:', err);
             alert('Failed to export PDF.');
         } finally {
+            // --- POST-CAPTURE RESTORE ---
+            const element = document.getElementById('resumePaper');
+            const mobileBar = document.querySelector('.mobile-mode-bar');
+            const appFooter = document.querySelector('.app-footer');
+
+            // Restore mobile-mode-bar and footer visibility
+            if (mobileBar) mobileBar.style.display = '';
+            if (appFooter) appFooter.style.display = '';
+
+            // Restore mobile transforms
+            if (element) {
+                element.style.transform = '';
+                element.style.transformOrigin = '';
+                element.style.marginLeft = '';
+                element.style.marginRight = '';
+                element.style.marginBottom = '';
+            }
+
+            // Re-apply mobile scaling if on mobile
+            applyMobilePaperScaling();
+
             btn.innerHTML = originalHtml;
             btn.disabled = false;
         }
